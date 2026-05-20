@@ -1,0 +1,765 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Genesis — An Annual Hackathon Handbook</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,700;0,9..144,900;1,9..144,300;1,9..144,500;1,9..144,700&family=Instrument+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Geist+Mono:wght@300;400&display=swap" rel="stylesheet">
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        colors: {
+          'g-white': '#ffffff',
+          'g-off': '#f7f7f5',
+          'g-ink': '#111110',
+          'g-mid': '#888884',
+          'g-muted': '#b8b8b4',
+          'g-rule': '#e2e2de',
+          'g-accent': '#1a56db',
+        },
+        fontFamily: {
+          'serif': ['Fraunces', 'serif'],
+          'sans': ['Instrument Sans', 'sans-serif'],
+          'mono': ['Geist Mono', 'monospace'],
+        },
+      }
+    }
+  }
+</script>
+<style type="text/tailwindcss">
+  @layer base {
+    html { scroll-behavior: smooth; }
+    body { @apply bg-white text-g-ink font-sans overflow-x-hidden; }
+    h1, h2 { @apply font-serif leading-[1.02] tracking-tight; }
+    p { @apply leading-relaxed text-[15px]; }
+  }
+
+  @layer components {
+    .slide {
+      @apply min-h-screen flex flex-col justify-center relative overflow-hidden border-b border-g-rule;
+      padding: 72px 8vw;
+    }
+
+    /* Nav dots */
+    .nav-dot { @apply w-[5px] h-[5px] rounded-full bg-g-rule cursor-pointer border-none p-0 transition-all duration-300; }
+    .nav-dot.active { @apply bg-g-accent scale-[1.6]; }
+
+    /* Fade */
+    .fade-up { @apply opacity-0 translate-y-[18px] transition-all duration-500 ease-out; }
+    .fade-up.visible { @apply opacity-100 translate-y-0; }
+    .d1 { transition-delay: 0.08s; }
+    .d2 { transition-delay: 0.16s; }
+    .d3 { transition-delay: 0.24s; }
+    .d4 { transition-delay: 0.32s; }
+    .d5 { transition-delay: 0.40s; }
+    .d6 { transition-delay: 0.48s; }
+
+    /* Pulse animation */
+    .live-dot { @apply w-[7px] h-[7px] rounded-full bg-g-accent relative; }
+    .live-dot::after {
+      content: '';
+      @apply absolute -inset-[3px] rounded-full bg-g-accent opacity-25;
+      animation: pulse 1.8s ease-out infinite;
+    }
+    .live-dot-green { @apply bg-green-400; }
+    .live-dot-green::after { @apply bg-green-400; }
+
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 0.4; }
+      100% { transform: scale(2.6); opacity: 0; }
+    }
+
+    /* Cover heading italic style */
+    .cover-h1 em { @apply not-italic font-light text-white/35; font-style: italic; }
+
+    /* Generic em italic accent */
+    .em-mid em { font-style: italic; @apply font-light text-g-mid; }
+    .em-accent em { font-style: italic; @apply font-light text-g-accent; }
+    .em-white em { font-style: italic; @apply font-light text-white/35; }
+    .em-white-bright em { font-style: italic; @apply font-light text-white; }
+    .em-card em { font-style: italic; @apply font-light text-g-mid; }
+
+    /* Topic list */
+    .flow-topic-list span {
+      @apply text-xs text-g-ink leading-snug pl-3 relative block;
+    }
+    .flow-topic-list span::before {
+      content: '–';
+      @apply absolute left-0 text-g-accent text-[11px];
+    }
+
+    /* Contributor cell */
+    .contrib-cell {
+      @apply aspect-square bg-g-off rounded flex items-center justify-center font-mono text-[11px] text-g-mid relative overflow-hidden transition-all duration-200 cursor-default;
+    }
+    .contrib-cell.filled { @apply bg-g-ink text-white; }
+    .contrib-cell.filled:hover { @apply bg-g-accent scale-110 z-10; }
+    .contrib-cell.empty {
+      @apply bg-transparent text-transparent;
+      border: 1px dashed #e2e2de;
+    }
+
+    /* Topic row */
+    .topic-row {
+      @apply flex items-center gap-[18px] py-[17px] text-sm text-white/60 transition-colors duration-200 cursor-default;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .topic-row:first-child { border-top: 1px solid rgba(255,255,255,0.07); }
+    .topic-row:hover { @apply text-white; }
+    .topic-row:hover .topic-icon { @apply opacity-100; }
+    .topic-icon { @apply w-[18px] h-[18px] flex-shrink-0 opacity-45 transition-opacity duration-200; }
+
+    /* CTA Discord btn */
+    .cta-discord-btn:hover { @apply bg-white/90 translate-x-0.5; }
+
+    /* Handbook CTA */
+    .handbook-cta.disabled { @apply opacity-45 cursor-not-allowed pointer-events-none; }
+
+    /* Role block */
+    .role-block { @apply py-6 border-b; border-color: rgba(255,255,255,0.2); margin-right: 200px; }
+    .role-block:first-of-type { border-top: 1px solid rgba(255,255,255,0.2); }
+    .role-name { @apply font-serif text-lg font-bold text-white mb-1.5 tracking-tight flex items-center gap-2.5; }
+    .role-name::before {
+      content: '';
+      @apply block w-1.5 h-1.5 rounded-full bg-white/90 flex-shrink-0;
+    }
+
+    /* Phase divider */
+    .phase { @apply pr-10 py-9; border-right: 1px solid #e2e2de; }
+    .phase:not(:first-child) { @apply pl-10; }
+    .phase:last-child { @apply border-r-0 pr-0; }
+
+    /* Sample quote */
+    .sample-quote {
+      @apply mt-6 px-[22px] py-4 bg-blue-50 font-serif italic text-[15px] leading-relaxed text-blue-900 max-w-[56ch];
+      border-left: 2px solid #1a56db;
+    }
+
+    /* Roadmap col */
+    .rm-col { @apply pr-14 py-10; border-right: 1px solid #e2e2de; }
+    .rm-col:last-child { @apply border-r-0 pl-14 pr-0; }
+
+    /* Stat row */
+    .stat-row {
+      @apply grid items-center py-[26px];
+      grid-template-columns: 52px 1fr;
+      gap: 20px;
+      border-bottom: 1px solid #e2e2de;
+    }
+    .stat-row:first-child { border-top: 1px solid #e2e2de; }
+
+    /* Live stat */
+    .live-stat { @apply pt-4 pb-4; border-top: 1px solid #e2e2de; }
+    .live-stat:nth-child(2) { @apply pl-6; border-left: 1px solid #e2e2de; }
+
+    /* Live counter */
+    .live-counter {
+      @apply flex items-baseline gap-4 py-7;
+      border-top: 1.5px solid #111110;
+      border-bottom: 1px solid #e2e2de;
+    }
+
+    /* Sample card */
+    .sample-card {
+      @apply grid;
+      grid-template-columns: 220px 1fr;
+      border-top: 1.5px solid #111110;
+      border-bottom: 1px solid #e2e2de;
+    }
+    .sample-meta {
+      @apply pr-9 py-8 flex flex-col gap-[22px];
+      border-right: 1px solid #e2e2de;
+    }
+    .sample-body { @apply pl-9 py-8; }
+
+    /* Phases grid */
+    .phases {
+      @apply grid;
+      grid-template-columns: repeat(3, 1fr);
+      border-top: 1.5px solid #111110;
+    }
+
+    /* Flow cols */
+    .flow-cols {
+      @apply grid items-start;
+      grid-template-columns: 1fr 40px 1fr 40px 1fr;
+    }
+
+    /* RM cols */
+    .rm-cols {
+      @apply grid;
+      grid-template-columns: 1fr 1fr;
+      border-top: 1.5px solid #111110;
+    }
+
+    /* Cover wrap */
+    .cover-wrap {
+      @apply grid min-h-screen;
+      grid-template-columns: 55% 45%;
+    }
+
+    /* Mobile / Tablet */
+    @media (max-width: 900px) {
+      .nav-dots { @apply hidden; }
+      .cover-wrap { grid-template-columns: 1fr; }
+      .cover-l { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.07); padding: 48px 6vw; }
+      .cover-r { padding: 40px 6vw 52px; }
+      .prob-wrap, .what-wrap, .live-wrap, .covered-wrap { grid-template-columns: 1fr !important; gap: 48px !important; }
+      .contrib-mosaic { grid-template-columns: repeat(10, 1fr); }
+      .phases { grid-template-columns: 1fr; }
+      .phase { border-right: none; border-bottom: 1px solid #e2e2de; padding: 28px 0; }
+      .phase:not(:first-child) { padding-left: 0; }
+      .phase:last-child { border-bottom: none; }
+      .flow-cols { grid-template-columns: 1fr; }
+      .flow-arrow { display: none; }
+      .flow-col { border-top: 1px solid #e2e2de; }
+      .flow-col:first-child { border-top: none; }
+      .sample-head { grid-template-columns: 1fr !important; gap: 24px !important; }
+      .sample-card { grid-template-columns: 1fr; }
+      .sample-meta { border-right: none; border-bottom: 1px solid #e2e2de; padding: 24px 0; flex-direction: row; flex-wrap: wrap; gap: 24px; }
+      .sample-body { padding: 28px 0 24px; }
+      .rm-cols { grid-template-columns: 1fr; }
+      .rm-col { border-right: none; padding: 36px 0; border-bottom: 1px solid #e2e2de; }
+      .rm-col:last-child { border-bottom: none; padding-left: 0; }
+      .cta-l { padding-right: 0 !important; border-right: none !important; border-bottom: 1px solid rgba(255,255,255,0.14); padding-bottom: 32px; margin-bottom: 32px; }
+      .cta-role-wrap { flex-direction: column; }
+      .role-block:first-of-type { border-top: none; }
+    }
+
+    @media (max-width: 600px) {
+      .slide { padding: 52px 5vw; min-height: auto; }
+      .contrib-mosaic { grid-template-columns: repeat(6, 1fr); gap: 5px; }
+      .role-block { margin-right: 0; padding-left: 20px; padding-right: 20px; }
+    }
+  }
+</style>
+</head>
+<body>
+
+<nav class="nav-dots fixed right-7 top-1/2 -translate-y-1/2 flex flex-col gap-2.5 z-50">
+  <button class="nav-dot active" data-slide="1"></button>
+  <button class="nav-dot" data-slide="2"></button>
+  <button class="nav-dot" data-slide="3"></button>
+  <button class="nav-dot" data-slide="4"></button>
+  <button class="nav-dot" data-slide="5"></button>
+  <button class="nav-dot" data-slide="6"></button>
+  <button class="nav-dot" data-slide="7"></button>
+  <button class="nav-dot" data-slide="8"></button>
+  <button class="nav-dot" data-slide="9"></button>
+  <button class="nav-dot" data-slide="10"></button>
+  <button class="nav-dot" data-slide="11"></button>
+</nav>
+
+<!-- ══════════════ S1 — COVER ══════════════ -->
+<section class="slide bg-g-ink text-white !p-0 !border-b-0" id="s1">
+  <div class="cover-wrap">
+    <div class="cover-l flex flex-col justify-between" style="padding: 64px 5vw 64px 8vw; border-right: 1px solid rgba(255,255,255,0.07);">
+      <div class="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70">Genesis · 2026 · Annual Hackathon Handbook</div>
+      <div>
+        <h1 class="cover-h1 font-bold text-white leading-[0.92] tracking-[-0.04em]" style="font-size: clamp(64px, 8.5vw, 120px);">Gene<em>sis</em></h1>
+        <p class="text-[13px] text-white/40 leading-relaxed max-w-[38ch] mt-5">An Annual Hackathon Handbook, Written by the Community, for the Community.</p>
+      </div>
+      <div class="pt-6 flex justify-between items-center" style="border-top: 1px solid rgba(255,255,255,0.07);">
+        <span class="font-mono text-[9px] tracking-[0.15em] text-white/20 uppercase">genesis · /ˈdʒɛnɪsɪs/</span>
+      </div>
+    </div>
+    <div class="cover-r flex flex-col justify-end relative overflow-hidden" style="padding: 64px 8vw 64px 5vw;">
+      <div class="absolute -top-30 -right-30 pointer-events-none" style="top: -120px; right: -120px; width: 540px; height: 540px; background: radial-gradient(circle, rgba(26,86,219,0.22) 0%, transparent 65%);"></div>
+      <p class="font-serif italic font-light text-white/50 leading-snug relative z-10" style="font-size: clamp(20px, 2.4vw, 32px);">No single voice.<br>No outdated guides.<br>Just builders,<br>helping builders.</p>
+      <div class="flex flex-wrap gap-2 mt-10 relative z-10">
+        <span class="border border-white/20 text-white/55 font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full">Community-vetted</span>
+        <span class="border border-white/20 text-white/55 font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full">Annually updated</span>
+        <span class="border border-white/20 text-white/55 font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full">3-phase model</span>
+        <span class="border border-white/20 text-white/55 font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full">AI-synthesized</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S2 — PROBLEM ══════════════ -->
+<section class="slide bg-white" id="s2">
+  <div class="prob-wrap grid items-start" style="grid-template-columns: 1fr 1.5fr; gap: 100px;">
+    <div>
+      <h2 class="em-mid fade-up font-bold" style="font-size: clamp(38px, 4.5vw, 60px);">The knowledge <em>exists.</em><br>It's just nowhere.</h2>
+    </div>
+    <div class="flex flex-col gap-[22px] pt-1">
+      <p class="fade-up d1 text-[#3a3a38] text-[15px] leading-[1.78] max-w-[58ch]">We see newcomers show up to hackathons with zero direction. They have so many questions, but hackathons are too fast to allow that.</p>
+      <p class="fade-up d2 text-[#3a3a38] text-[15px] leading-[1.78] max-w-[58ch]">Most of the guides out there are either outdated, lacking depth, or just way too academic. You get the "what," but never the actual "how" and "why", so you're left scrambling through the real parts on your own.</p>
+      <p class="fade-up d3 text-[#3a3a38] text-[15px] leading-[1.78] max-w-[58ch]">The community has the knowledge, but it's buried in a thousand random conversations with seniors, mentors, and within Discord groups. We're missing a resource that actually covers the messy hackathon reality — everything from scrounging for a team on Discord at 2:00 AM to surviving the "demo-day curse" when your front-end suddenly stops talking to the blockchain.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S3 — WHAT IS GENESIS ══════════════ -->
+<section class="slide bg-g-off" id="s3">
+  <div class="what-wrap grid items-center" style="grid-template-columns: 1fr 1fr; gap: 96px;">
+    <div>
+      <h2 class="em-accent fade-up font-bold mb-7" style="font-size: clamp(38px, 4.8vw, 62px);">One living,<br><em>community-vetted</em><br>handbook, <span class="text-g-accent">GENESIS</span></h2>
+    </div>
+    <div>
+      <p class="fade-up d1 text-[15px] leading-[1.75] text-[#3a3a38]">Genesis is an annual hackathon handbook where the community converges to architect and compile a definitive guide. Instead of a single voice attempting to cover everything, we crowdsource expertise, each contributor documenting exactly what they know best.</p>
+      <p class="fade-up d2 text-[15px] leading-[1.75] text-[#3a3a38] mt-5">The result is a resource that's more comprehensive, balanced, and current than any individual could ever produce. It's updated annually, forged from real hackathon experience, and entirely owned by the community.</p>
+      <div class="flex flex-col mt-10">
+        <div class="stat-row fade-up d3">
+          <svg class="w-10 h-10" viewBox="0 0 40 40" fill="none">
+            <rect x="5" y="8" width="30" height="26" rx="3" stroke="#1a56db" stroke-width="1.4"></rect>
+            <line x1="5" y1="15" x2="35" y2="15" stroke="#1a56db" stroke-width="1.4"></line>
+            <line x1="13" y1="4" x2="13" y2="12" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round"></line>
+            <line x1="27" y1="4" x2="27" y2="12" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round"></line>
+            <circle cx="20" cy="25" r="2.5" fill="#1a56db"></circle>
+          </svg>
+          <div>
+            <div class="font-serif text-[28px] font-bold text-g-ink tracking-[-0.03em] leading-none">Annual</div>
+            <div class="text-xs text-g-mid leading-relaxed mt-1">Always current — never left to go stale</div>
+          </div>
+        </div>
+        <div class="stat-row fade-up d4">
+          <svg class="w-10 h-10" viewBox="0 0 40 40" fill="none">
+            <circle cx="14" cy="13" r="5" stroke="#1a56db" stroke-width="1.4"></circle>
+            <circle cx="27" cy="13" r="5" stroke="#1a56db" stroke-width="1.4"></circle>
+            <path d="M4 34c0-5.523 4.477-10 10-10" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M24 34c0-5.523 4.477-10 10-10" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round"></path>
+            <path d="M14 24a10 10 0 0 1 13 0" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round"></path>
+          </svg>
+          <div>
+            <div class="font-serif text-[28px] font-bold text-g-ink tracking-[-0.03em] leading-none">Many voices</div>
+            <div class="text-xs text-g-mid leading-relaxed mt-1">Not one person trying to cover everything</div>
+          </div>
+        </div>
+        <div class="stat-row fade-up d5">
+          <svg class="w-10 h-10" viewBox="0 0 40 40" fill="none">
+            <path d="M20 5L36 13L20 21L4 13L20 5Z" stroke="#1a56db" stroke-width="1.4" stroke-linejoin="round"></path>
+            <path d="M4 20L20 28L36 20" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+            <path d="M4 28L20 36L36 28" stroke="#1a56db" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path>
+          </svg>
+          <div>
+            <div class="font-serif text-[28px] font-bold text-g-ink tracking-[-0.03em] leading-none">3 phases</div>
+            <div class="text-xs text-g-mid leading-relaxed mt-1">Structured contribution → unified voice</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S4 — LIVE COUNTER + CONTRIBUTOR MOSAIC ══════════════ -->
+<section class="slide bg-white" id="s4">
+  <div class="live-wrap grid items-center" style="grid-template-columns: 1fr 1fr; gap: 80px;">
+    <div class="flex flex-col gap-9">
+      <div class="fade-up font-mono text-[10px] tracking-[0.22em] uppercase text-g-accent flex items-center gap-2.5">
+        <span class="live-dot"></span>Live · Year 01 · In Progress
+      </div>
+      <h2 class="em-accent fade-up d1 font-bold" style="font-size: clamp(38px, 4.8vw, 62px);">The handbook is<br>being <em>written.</em><br>Right now.</h2>
+
+      <div class="live-counter fade-up d2">
+        <div class="font-serif font-black tracking-[-0.05em] leading-[0.9] text-g-ink tabular-nums" id="contribCount" data-target="0" style="font-size: clamp(72px, 9vw, 120px);">0</div>
+        <div class="flex flex-col gap-1 pb-2.5">
+          <div class="font-mono text-[10px] tracking-[0.18em] uppercase text-g-ink">Contributions</div>
+          <div class="text-xs text-g-mid">Across all 3 phases · updated live</div>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2">
+        <div class="live-stat fade-up d3">
+          <div class="font-serif text-[28px] font-bold tracking-[-0.02em]" id="contribContributors" data-target="0">0</div>
+          <div class="font-mono text-[9px] tracking-[0.15em] uppercase text-g-mid mt-0.5">Contributors</div>
+        </div>
+        <div class="live-stat fade-up d4">
+          <div class="font-serif text-[28px] font-bold tracking-[-0.02em]" id="contribTopics" data-target="0">0</div>
+          <div class="font-mono text-[9px] tracking-[0.15em] uppercase text-g-mid mt-0.5">Topics Mapped</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="fade-up d2 relative">
+      <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-g-mid mb-5 flex justify-between items-center">
+        <span>// Contributor Wall</span>
+        <span class="text-g-ink" id="contribWallCount">— / 30</span>
+      </div>
+      <div class="contrib-mosaic grid grid-cols-8 gap-1.5" id="contribMosaic">
+        <!-- Cells injected by JS -->
+      </div>
+      <div class="mt-[18px] text-xs text-g-mid flex justify-between">
+        <span>Each cell = one contributor</span>
+        <a href="https://discord.gg/NayguCAK" target="_blank" rel="noopener" class="text-g-accent no-underline font-medium hover:underline">Add yours →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S5 — HOW IT'S WRITTEN ══════════════ -->
+<section class="slide bg-g-off" id="s5">
+  <p class="fade-up text-[15px] text-[#3a3a38] leading-[1.75] max-w-[60ch] mb-[52px]">Each year, contributions open to anyone with hackathon experience. Together, they write the handbook through three structured phases.</p>
+  <div class="phases">
+    <div class="phase fade-up d1">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-mid mb-5">Phase 01</div>
+      <div class="em-accent font-serif text-[26px] font-bold mb-3 tracking-[-0.02em]"><em>Map</em> It</div>
+      <p class="text-sm leading-[1.7] text-[#555553] max-w-[26ch]">Contributors propose topics they believe belong in the guide. Everything is on the table.</p>
+    </div>
+    <div class="phase fade-up d2">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-mid mb-5">Phase 02</div>
+      <div class="em-accent font-serif text-[26px] font-bold mb-3 tracking-[-0.02em]"><em>Describe</em> It</div>
+      <p class="text-sm leading-[1.7] text-[#555553] max-w-[26ch]">Contributors write descriptions for each topic compiled from Phase 1.</p>
+    </div>
+    <div class="phase fade-up d3">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-mid mb-5">Phase 03</div>
+      <div class="em-accent font-serif text-[26px] font-bold mb-3 tracking-[-0.02em]"><em>Advise</em> It</div>
+      <p class="text-sm leading-[1.7] text-[#555553] max-w-[26ch]">For each topic, contributors selectively add their tips, insights, and real-world advice.</p>
+    </div>
+  </div>
+  <p class="fade-up d4 mt-9 text-[13px] text-g-mid leading-[1.65] max-w-[64ch] pl-4 border-l-2 border-g-rule">Each phase runs with 3–5 days between them to consolidate. After each phase, submissions are reviewed and synthesized by AI into a single, balanced unified voice.</p>
+</section>
+
+<!-- ══════════════ S6 — WHAT GETS COVERED ══════════════ -->
+<section class="slide bg-g-ink text-white" id="s6">
+  <div class="covered-wrap grid items-center" style="grid-template-columns: 1fr 1.3fr; gap: 100px;">
+    <div>
+      <h2 class="em-white fade-up font-bold text-white mb-5" style="font-size: clamp(36px, 4.5vw, 58px);">Everything that <em>actually</em> matters.</h2>
+      <p class="fade-up d1 text-sm text-white/40 leading-[1.7] max-w-[36ch]">Topics evolve each year based on what contributors surface. Year 1 — shaped by real experience, not assumptions.</p>
+    </div>
+    <div class="flex flex-col">
+      <div class="topic-row fade-up d1">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><rect x="2" y="2" width="14" height="14" rx="2" stroke="currentColor" stroke-width="1.2"></rect><line x1="5" y1="6" x2="13" y2="6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line><line x1="5" y1="9" x2="11" y2="9" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line><line x1="5" y1="12" x2="9" y2="12" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></line></svg>
+        What is a hackathon and how it's structured
+      </div>
+      <div class="topic-row fade-up d2">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.2"></circle><path d="M9 5.5v3.5l2 2" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"></path></svg>
+        Judging criteria and how to think like a judge
+      </div>
+      <div class="topic-row fade-up d3">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><circle cx="6" cy="7" r="3" stroke="currentColor" stroke-width="1.2"></circle><circle cx="13" cy="11" r="3" stroke="currentColor" stroke-width="1.2"></circle><path d="M9 7.5c1.5 0 4 1 4 3.5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-dasharray="1.5 1.5"></path></svg>
+        Team management and defining roles
+      </div>
+      <div class="topic-row fade-up d4">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><path d="M2 14L6 5l4.5 6.5L13 8l3 6" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        From idea to pitch
+      </div>
+      <div class="topic-row fade-up d5">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><polyline points="3,12 7,7 10,10 14,5" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round"></polyline><rect x="2" y="13" width="14" height="2" rx="1" fill="currentColor" opacity="0.3"></rect></svg>
+        Tech stacks by role
+      </div>
+      <div class="topic-row fade-up d5">
+        <svg class="topic-icon" viewBox="0 0 18 18" fill="none"><polygon points="9,2 16,5.5 16,12.5 9,16 2,12.5 2,5.5" stroke="currentColor" stroke-width="1.2"></polygon><circle cx="9" cy="9" r="2.5" stroke="currentColor" stroke-width="1.2"></circle></svg>
+        Web3-specific tracks, tooling, and culture
+      </div>
+      <div class="mt-5 font-mono text-[9px] tracking-[0.14em] text-white/70 uppercase">Topics evolve each year based on contributor input</div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S7 — PHASE FLOW EXAMPLE ══════════════ -->
+<section class="slide bg-g-off" id="s7">
+  <div class="mb-12">
+    <h2 class="em-accent font-bold" style="font-size: clamp(34px, 4vw, 52px);">From raw input<br>to <em>refined</em> guidance.</h2>
+  </div>
+  <div class="flow-cols d1">
+
+    <!-- PHASE 1 -->
+    <div class="flow-col bg-white border border-g-rule px-[22px] py-[26px]">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-accent mb-3 uppercase">Phase 01 · Map It</div>
+      <div class="font-serif text-lg font-bold mb-4">Topics Proposed</div>
+      <div class="flex flex-col gap-2">
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">Contributor A</span>
+          <div class="text-xs leading-[1.65] text-g-ink">
+            <div class="flow-topic-list">
+              <span>How to find a team</span>
+              <span>Judging criteria</span>
+              <span>Roles</span>
+              <span>Time management</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">Contributor B</span>
+          <div class="text-xs leading-[1.65] text-g-ink">
+            <div class="flow-topic-list">
+              <span>Team management</span>
+              <span>What roles will we need</span>
+              <span>Managing deadlines</span>
+            </div>
+          </div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">Contributor C</span>
+          <div class="text-xs leading-[1.65] text-g-ink">
+            <div class="flow-topic-list">
+              <span>Ideation</span>
+              <span>Demo day</span>
+              <span>Tech stack</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow flex items-center justify-center pt-[52px] text-g-rule">
+      <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </div>
+
+    <!-- PHASE 2 -->
+    <div class="flow-col bg-white border border-g-rule px-[22px] py-[26px]">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-accent mb-3 uppercase">Phase 02 · Describe It</div>
+      <div class="font-serif text-lg font-bold mb-4">Descriptions Written</div>
+      <div class="flex flex-col gap-2">
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">How to Find a Team</span>
+          <div class="text-xs leading-[1.65] text-g-ink">Finding a team means more than filling seats. It's about identifying complementary skills, aligning on ambition, and establishing trust fast — ideally before the clock even starts.</div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">Managing Roles &amp; Deadlines</span>
+          <div class="text-xs leading-[1.65] text-g-ink">Without clear ownership, hackathon teams stall. This covers role assignment based on strengths, setting internal milestones, and what to do when someone goes quiet at hour 18.</div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">Demo Day</span>
+          <div class="text-xs leading-[1.65] text-g-ink">Demo day is a performance. Judges are fatigued by demo 10. This covers how to structure your 3 minutes and how to hold the room even when your live demo decides to break.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="flow-arrow flex items-center justify-center pt-[52px] text-g-rule">
+      <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none"><path d="M4 10h12M12 6l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </div>
+
+    <!-- PHASE 3 -->
+    <div class="flow-col bg-white border border-g-rule px-[22px] py-[26px]">
+      <div class="font-mono text-[9px] tracking-[0.15em] text-g-accent mb-3 uppercase">Phase 03 · Advise It</div>
+      <div class="font-serif text-lg font-bold mb-4">Real Advice Added</div>
+      <div class="flex flex-col gap-2">
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">On "Find a Team" — 3 contributors</span>
+          <div class="text-xs leading-[1.65] text-g-ink">"Post in team-finding channels 48h before kickoff, not on the day. Include your stack, timezone, and what you want to build — specificity gets replies. Vague posts get ignored."</div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">On "Roles &amp; Deadlines" — 4 contributors</span>
+          <div class="text-xs leading-[1.65] text-g-ink">"Set a hard internal deadline 3 hours before submission. The last stretch is for polish only — not new features. Scope creep at hour 20 kills otherwise strong projects."</div>
+        </div>
+        <div class="bg-g-off border border-g-rule px-3.5 py-2.5">
+          <span class="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">On "Demo Day" — 3 contributors</span>
+          <div class="text-xs leading-[1.65] text-g-ink">"Open with the problem, not the solution. Make judges feel the pain before you show the fix. If your live demo might break, have a recording ready and own it upfront."</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+  <div class="d3 mt-9 px-[22px] py-[18px] bg-g-ink text-white/60 text-[13px] leading-[1.6] flex gap-3.5 items-start max-w-[680px]">
+    <span class="text-g-accent flex-shrink-0 mt-0.5">✦</span>
+    After each phase, AI synthesizes all contributions into a single balanced voice — preserving depth while removing redundancy.
+  </div>
+</section>
+
+<!-- ══════════════ S8 — SAMPLE CONTRIBUTION ══════════════ -->
+<section class="slide bg-white" id="s8">
+  <div class="sample-head grid items-end mb-14" style="grid-template-columns: 1fr 1fr; gap: 80px;">
+    <h2 class="em-accent fade-up font-bold" style="font-size: clamp(34px, 4.2vw, 54px);">What a contribution<br><em>looks like.</em></h2>
+    <p class="fade-up d1 text-sm leading-[1.75] text-[#3a3a38] max-w-[48ch]">A contribution is a small, focused unit — one person sharing one thing they know well. Below is a real submission from Phase 02 — Describe It, showing exactly what we ask for.</p>
+  </div>
+
+  <div class="sample-card fade-up d2">
+    <div class="sample-meta">
+      <div class="flex flex-col gap-1">
+        <div class="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid">Submitted by</div>
+        <div class="text-[13px] text-g-ink font-medium">Anonymous Contributor</div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <div class="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid">Phase</div>
+        <div class="text-[13px] text-g-ink font-medium">02 — Describe It</div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <div class="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid">Topic</div>
+        <div class="text-[13px] text-g-ink font-medium">Demo Day</div>
+      </div>
+      <div class="flex flex-col gap-1">
+        <div class="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid">Tags</div>
+        <div class="flex flex-wrap gap-1.5">
+          <span class="font-mono text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 border border-g-rule rounded-full text-g-ink">Pitching</span>
+          <span class="font-mono text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 border border-g-rule rounded-full text-g-ink">Judges</span>
+          <span class="font-mono text-[9px] tracking-[0.1em] uppercase px-2.5 py-1 border border-g-rule rounded-full text-g-ink">Live Demos</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="sample-body">
+      <div class="font-mono text-[10px] tracking-[0.18em] uppercase text-g-accent mb-3.5">Phase 02 · Describe the Topic</div>
+      <h3 class="em-card font-serif text-[28px] font-bold tracking-[-0.02em] mb-[22px]">Demo Day is a <em>performance,</em> not a presentation.</h3>
+      <p class="text-[14.5px] leading-[1.75] text-[#2a2a28] max-w-[62ch]">By the time judges reach your booth, they've already seen ten demos. They're tired, they're hungry, and their pattern-matching is on autopilot. The hackathon doesn't end when you stop coding — it ends when you make a fatigued stranger care about your project in under three minutes.</p>
+      <p class="text-[14.5px] leading-[1.75] text-[#2a2a28] max-w-[62ch] mt-3.5">A demo isn't a feature tour. It's a story arc. Open with the problem so the judges feel it. Then show the fix — but only the parts that actually matter. <strong class="font-semibold text-g-ink">Cut everything else.</strong> If your live demo can break, assume it will, and have a 30-second recording ready as backup. Own the failure if it happens; judges respect composure more than perfection.</p>
+
+      <div class="sample-quote">
+        "The best demos I've ever seen weren't the most technical. They were the ones where, three minutes in, the judges leaned forward."
+      </div>
+
+      <div class="mt-7 flex gap-6 items-center flex-wrap">
+        <div class="text-xs text-g-mid flex items-center gap-1.5"><strong class="text-g-ink font-semibold">312</strong> words</div>
+        <div class="text-xs text-g-mid flex items-center gap-1.5"><strong class="text-g-ink font-semibold">~2 min</strong> to write</div>
+        <div class="text-xs text-g-mid flex items-center gap-1.5"><strong class="text-g-ink font-semibold">Submitted via</strong> Google Form</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S9 — THE HANDBOOK ══════════════ -->
+<section class="slide bg-g-accent text-white !border-b-0 items-center text-center" id="s9">
+  <div class="fade-up">
+    <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-white/70 mb-8">The Result</div>
+    <h2 class="em-white-bright font-serif font-bold text-white leading-[0.95] tracking-[-0.04em]" style="font-size: clamp(56px, 9vw, 130px);">The Genesis<br><em>Hackathon</em><br>Handbook.</h2>
+    <p class="text-[15px] text-white/70 mt-7 max-w-[50ch] mx-auto">Written by the community. For the community. Every year.</p>
+    <a href="#" class="handbook-cta disabled inline-flex items-center gap-2.5 mt-9 px-6 py-3.5 bg-white text-g-accent text-[13px] font-semibold no-underline transition-opacity duration-200" id="handbookCta">
+      Read Edition 01
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 7h8M8 4l3 3-3 3" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+    </a>
+    <div class="font-mono text-[10px] tracking-[0.15em] uppercase text-white/55 mt-4">Releasing after Phase 03 closes</div>
+  </div>
+</section>
+
+<!-- ══════════════ S10 — ROADMAP ══════════════ -->
+<section class="slide bg-white" id="s10">
+  <div class="fade-up mb-[52px]">
+    <h2 class="em-accent font-bold" style="font-size: clamp(38px, 4.8vw, 62px);">Built to <em>last.</em></h2>
+  </div>
+  <div class="rm-cols">
+    <div class="rm-col">
+      <div class="font-serif text-[56px] font-black tracking-[-0.05em] leading-none text-g-ink/30 mb-4">Y1</div>
+      <div class="font-serif text-xl font-bold mb-7 tracking-[-0.02em]">Lay the Foundation</div>
+      <div class="flex flex-col gap-3.5">
+        <div class="fade-up d1 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>20–30 contributors for the inaugural edition</span></div>
+        <div class="fade-up d2 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Publish the first edition of Genesis</span></div>
+        <div class="fade-up d3 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Promote through hackathon communities to build awareness and grow the contributor base</span></div>
+        <div class="fade-up d4 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Bring in developers to help maintain and build the platform</span></div>
+      </div>
+    </div>
+    <div class="rm-col">
+      <div class="font-serif text-[56px] font-black tracking-[-0.05em] leading-none text-g-ink/30 mb-4">Y2 <span class="text-[22px] align-middle tracking-[-0.02em] font-light italic">&amp; beyond</span></div>
+      <div class="font-serif text-xl font-bold mb-7 tracking-[-0.02em]">Grow the Community</div>
+      <div class="flex flex-col gap-3.5">
+        <div class="fade-up d1 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Story feed for contributors and participants to share their hackathon experiences</span></div>
+        <div class="fade-up d2 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Voting system introduced across all three phases</span></div>
+        <div class="fade-up d3 flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]"><div class="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]"></div><span>Platform goes open source</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ S11 — CTA ══════════════ -->
+<section class="slide bg-g-accent text-white !border-b-0" id="s11">
+  <div class="flex flex-col">
+    <div class="flex">
+      <div class="cta-l pr-20" style="border-right: 1px solid rgba(255,255,255,0.14);">
+        <h2 class="em-white-bright fade-up font-bold text-white leading-[1.05] mb-6" style="font-size: clamp(36px, 4.5vw, 58px);">Join the<br><em>build.</em></h2>
+      </div>
+      <div class="cta-r">
+
+        <!-- DISCORD HERO BLOCK -->
+        <div class="fade-up d1 px-[30px] py-7 mb-9 max-w-[540px]" style="background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.18);">
+          <div class="font-mono text-[10px] tracking-[0.2em] uppercase text-white/55 mb-3.5 flex items-center gap-2.5">
+            <span class="live-dot live-dot-green"></span>Open · No application · No filter at the door
+          </div>
+          <h3 class="em-white font-serif text-2xl font-bold tracking-[-0.02em] mb-2 text-white">Step <em>one</em> — join Discord.</h3>
+          <p class="text-[13.5px] leading-[1.65] text-white/80 mb-[18px] max-w-[44ch]">All contribution tasks live in our Discord. Pick what you want to work on, submit when you're ready. Filtering happens at submission review, not at entry.</p>
+          <a href="https://discord.gg/NayguCAK" target="_blank" rel="noopener" class="cta-discord-btn inline-flex items-center gap-2.5 px-[22px] py-3 bg-white text-g-accent text-[13px] font-semibold no-underline transition-all duration-200">
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M19.27 5.33C17.94 4.71 16.5 4.26 15 4a.09.09 0 0 0-.07.03c-.18.33-.39.76-.53 1.09a16.09 16.09 0 0 0-4.8 0c-.14-.34-.35-.76-.54-1.09c-.01-.02-.04-.03-.07-.03c-1.5.26-2.93.71-4.27 1.33c-.01 0-.02.01-.03.02c-2.72 4.07-3.47 8.03-3.1 11.95c0 .02.01.04.03.05c1.8 1.32 3.53 2.12 5.24 2.65c.03.01.06 0 .07-.02c.4-.55.76-1.13 1.07-1.74c.02-.04 0-.08-.04-.09c-.57-.22-1.11-.48-1.64-.78c-.04-.02-.04-.08-.01-.11c.11-.08.22-.17.33-.25c.02-.02.05-.02.07-.01c3.44 1.57 7.15 1.57 10.55 0c.02-.01.05-.01.07.01c.11.09.22.17.33.26c.04.03.04.09-.01.11c-.52.31-1.07.56-1.64.78c-.04.01-.05.06-.04.09c.32.61.68 1.19 1.07 1.74c.03.01.06.02.09.01c1.72-.53 3.45-1.33 5.25-2.65c.02-.01.03-.03.03-.05c.44-4.53-.73-8.46-3.1-11.95c-.01-.01-.02-.02-.04-.02M8.52 14.91c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.84 2.12-1.89 2.12m6.97 0c-1.03 0-1.89-.95-1.89-2.12s.84-2.12 1.89-2.12c1.06 0 1.9.96 1.89 2.12c0 1.17-.83 2.12-1.89 2.12"></path></svg>
+            Join the Genesis Discord
+          </a>
+        </div>
+
+        <div class="cta-role-wrap flex flex-col">
+          <div class="role-block fade-up d2">
+            <div class="role-name">Contributors</div>
+            <p class="text-[13px] leading-[1.65] text-white/80 max-w-[42ch] pl-4">Anyone with hackathon experience. You don't need to know everything. You just need to have been there. Pick a task in Discord and submit when you're ready.</p>
+          </div>
+          <div class="role-block fade-up d3">
+            <div class="role-name">Committee Members</div>
+            <p class="text-[13px] leading-[1.65] text-white/80 max-w-[42ch] pl-4">People who believe in this problem and want to help shape how Genesis grows, operates, and sustains. From designers to developers — DM us in Discord.</p>
+          </div>
+        </div>
+
+        <p class="fade-up d4 mt-9 font-serif italic text-[17px] text-white/65 leading-[1.55] max-w-[44ch] font-light">"Every hackathon leaves behind knowledge and lessons. Let's build Genesis and put them all in one place."</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // ─────────────────────────────────────────────
+  // NAV DOTS + FADE OBSERVER
+  // ─────────────────────────────────────────────
+  const dots = document.querySelectorAll('.nav-dot');
+  const slides = document.querySelectorAll('.slide');
+
+  dots.forEach(dot => {
+    dot.addEventListener('click', () => {
+      document.getElementById('s' + dot.dataset.slide).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const num = entry.target.id.replace('s', '');
+      dots.forEach(d => d.classList.remove('active'));
+      const active = document.querySelector(`[data-slide="${num}"]`);
+      if (active) active.classList.add('active');
+      entry.target.querySelectorAll('.fade-up').forEach(el => el.classList.add('visible'));
+
+      if (entry.target.id === 's4' && !entry.target.dataset.counted) {
+        entry.target.dataset.counted = '1';
+        animateCounters();
+        renderMosaic();
+      }
+    });
+  }, { threshold: 0.35 });
+
+  slides.forEach(s => obs.observe(s));
+  document.querySelectorAll('#s1 .fade-up').forEach(el => el.classList.add('visible'));
+
+  // ─────────────────────────────────────────────
+  // LIVE STATS (placeholder — wire to Firestore later)
+  // ─────────────────────────────────────────────
+  const STATS = {
+    contributions: 0,
+    contributors: 0,
+    topics: 0,
+    capacity: 30
+  };
+
+  function animateCounters() {
+    const targets = [
+      { el: document.getElementById('contribCount'),        val: STATS.contributions },
+      { el: document.getElementById('contribContributors'), val: STATS.contributors },
+      { el: document.getElementById('contribTopics'),       val: STATS.topics }
+    ];
+    targets.forEach(({ el, val }) => {
+      if (!el) return;
+      const start = performance.now();
+      const duration = 1100;
+      function tick(now) {
+        const t = Math.min(1, (now - start) / duration);
+        const eased = 1 - Math.pow(1 - t, 3);
+        el.textContent = Math.round(val * eased);
+        if (t < 1) requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    });
+    const wallEl = document.getElementById('contribWallCount');
+    if (wallEl) wallEl.textContent = `${STATS.contributors} / ${STATS.capacity}`;
+  }
+
+  function renderMosaic() {
+    const mosaic = document.getElementById('contribMosaic');
+    if (!mosaic) return;
+    mosaic.innerHTML = '';
+    for (let i = 0; i < STATS.capacity; i++) {
+      const cell = document.createElement('div');
+      cell.className = 'contrib-cell ' + (i < STATS.contributors ? 'filled' : 'empty');
+      if (i < STATS.contributors) cell.textContent = String(i + 1).padStart(2, '0');
+      mosaic.appendChild(cell);
+    }
+  }
+</script>
+
+</body>
+</html>
