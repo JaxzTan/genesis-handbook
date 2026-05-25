@@ -85,7 +85,7 @@ export default function HomePage() {
               style={{ borderTop: "1px solid rgba(255,255,255,0.07)" }}
             >
               <span className="font-mono text-[9px] tracking-[0.15em] text-white/20 uppercase">
-                genesis · /ˈdʒɛnɪsɪs/
+                genesis - handbook
               </span>
             </div>
           </div>
