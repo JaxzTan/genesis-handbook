@@ -1,0 +1,15 @@
+services:
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    env_file:
+      - ./frontend/.env
+    ports:
+      - "3004:3004"
+    volumes:
+      # Mount source for live reload during development
+      - ./frontend:/app
+      # Keep container's node_modules and .next (don't shadow with host)
+      - /app/node_modules
+      - /app/.next
