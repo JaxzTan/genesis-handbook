@@ -7,9 +7,15 @@ services:
       - ./frontend/.env
     ports:
       - "3004:3004"
-    volumes:
-      # Mount source for live reload during development
-      - ./frontend:/app
-      # Keep container's node_modules and .next (don't shadow with host)
-      - /app/node_modules
-      - /app/.next
+    develop:
+      watch:
+        # Sync source changes into the running container for hot reload
+        - action: sync
+          path: ./frontend
+          target: /app
+          ignore:
+            - node_modules/
+            - .next/
+        # Rebuild the image when dependencies change
+        - action: rebuild
+          path: ./frontend/package.json
