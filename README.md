@@ -62,7 +62,7 @@ Topics evolve each year based on what contributors surface. Year 1 — shaped by
 
 All contribution tasks live in our Discord. Pick what you want to work on, submit when you're ready. Filtering happens at submission review, not at entry.
 
-**Step one — [join the Genesis Discord](https://discord.gg/NayguCAK).**
+**Step one — ([genesis_handbook](https://genesis-handbook.online/)).**
 
 - **Contributors** — Anyone with hackathon experience. You don't need to know everything. You just need to have been there.
 - **Committee Members** — People who want to help shape how Genesis grows, operates, and sustains. From designers to developers — DM us in Discord.
