@@ -11,11 +11,24 @@ generator client {
 }
 
 model Contributor {
-  id         String   @id @default(cuid())
-  name       String                      // 墙上显示
-  avatarUrl  String?                     // 头像 = 社会证明的"脸"
-  profileUrl String?                     // 点进去:github / 个人页
-  role       String?                     // 贡献了什么:翻译 / 第3章 / 校对
-  approved   Boolean  @default(false)    // 门槛:你批准了才上墙
-  createdAt  DateTime @default(now())
+  id            String   @id @default(cuid())
+  githubId      String?  @unique             // GitHub user id — idempotent sync key
+  name          String                       // 墙上显示
+  avatarUrl     String?                      // 头像 = 社会证明的"脸"
+  profileUrl    String?                      // 点进去:github / 个人页
+  role          String?                      // 贡献了什么:翻译 / 第3章 / 校对
+  contributions Int      @default(0)         // commit count from GitHub
+  approved      Boolean  @default(false)     // 门槛:你批准了才上墙
+  createdAt     DateTime @default(now())
+}
+
+model Feedback {
+  id        String   @id @default(cuid())
+  name      String?  // optional — anonymous feedback allowed
+  email     String?  // optional — for follow-up only
+  rating    Int?     // optional 1–5
+  message   String   // required
+  createdAt DateTime @default(now())
+
+  @@index([createdAt])
 }
