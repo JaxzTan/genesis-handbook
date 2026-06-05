@@ -1,5 +1,11 @@
+# dependencies & build output
+node_modules/
+.next/
+out/
+build/
 
-*.node_modules/
 frontend/package-lock.json
 .claude
 .env
+.env.local
+.DS_Store
