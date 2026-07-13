@@ -16,4 +16,7 @@ export const MANUAL_CONTRIBUTORS: readonly ManualContributor[] = [
   { username: "jaycigan05", role: null },
   { username: "nizarsyahmi37", role: null },
   { username: "yaphaojian", role: null },
+  { username: "locorocorolling", role: null },
+  { username: "ethanlxz", role: null },
+  { username: "mewHacks", role: null },
 ];
