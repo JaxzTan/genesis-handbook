@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 const COVER_PILLS = [
   "Community-vetted",
   "Annually updated",
@@ -41,6 +43,12 @@ export function CoverSlide() {
             <span className="font-mono text-[9px] tracking-[0.15em] text-white/20 uppercase">
               genesis - handbook
             </span>
+            <Link
+              href="/handbook_v1"
+              className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/80 border border-white/25 px-4 py-2 rounded-full no-underline transition-colors duration-200 hover:bg-white hover:text-g-ink hover:border-white"
+            >
+              Read Handbook v1 →
+            </Link>
           </div>
         </div>
         <div
