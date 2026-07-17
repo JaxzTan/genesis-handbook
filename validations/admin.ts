@@ -39,14 +39,18 @@ export const feedbackFilterSchema = z.object({
 
   sort: z.enum(["newest", "oldest"]).catch("newest").default("newest"),
 
-  // Rows rendered at once. An allow-list rather than a free number, so nobody
-  // can ask for ?limit=1000000 and stall the page.
-  limit: z.enum(["25", "50", "100", "200"]).catch("50").default("50"),
+  // Page size. An allow-list rather than a free number, so nobody can ask for
+  // ?limit=1000000 and stall the page.
+  limit: z.enum(["20", "50", "100"]).catch("20").default("20"),
+
+  // 1-based. Junk or out-of-range values fall back to the first page; the
+  // server clamps the upper bound once it knows how many rows matched.
+  page: z.coerce.number().int().min(1).catch(1).default(1),
 
   q: z.string().trim().max(200).catch("").default(""),
 });
 
-export const LIMIT_OPTIONS = ["25", "50", "100", "200"] as const;
+export const LIMIT_OPTIONS = ["20", "50", "100"] as const;
 
 export type AdminLoginInput = z.input<typeof adminLoginSchema>;
 export type FeedbackFilter = z.output<typeof feedbackFilterSchema>;

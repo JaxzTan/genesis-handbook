@@ -3,6 +3,7 @@ import { Suspense } from "react";
 import Link from "next/link";
 import { getDashboardData } from "@/actions/admin-feedback";
 import { FeedbackFilters } from "@/components/admin/feedback-filters";
+import { FeedbackPagination } from "@/components/admin/feedback-pagination";
 import { FeedbackTable } from "@/components/admin/feedback-table";
 import { LogoutButton } from "@/components/admin/logout-button";
 import { RatingDistribution } from "@/components/admin/rating-distribution";
@@ -29,7 +30,8 @@ export default async function AdminDashboardPage({
 
   // getDashboardData calls requireAdmin() — the real gate. The proxy redirect is
   // only cosmetic and cannot be relied on here.
-  const { stats, items, matched, truncated } = await getDashboardData(filter);
+  const { stats, items, matched, page, pageCount, firstRow, lastRow } =
+    await getDashboardData(filter);
 
   return (
     <main className="min-h-dvh bg-g-off px-6 py-14 md:px-10">
@@ -72,9 +74,9 @@ export default async function AdminDashboardPage({
             <h2 className="font-serif text-xl font-bold text-g-ink m-0">
               {matched} {matched === 1 ? "entry" : "entries"}
             </h2>
-            {truncated && (
+            {pageCount > 1 && (
               <p className="font-mono text-[10px] tracking-[0.08em] uppercase text-g-muted m-0">
-                Showing first {items.length} — narrow the filters to see more
+                Page {page} of {pageCount}
               </p>
             )}
           </div>
@@ -90,6 +92,16 @@ export default async function AdminDashboardPage({
           </Suspense>
 
           <FeedbackTable items={items} filtered={isFiltered(filter)} />
+
+          <Suspense fallback={null}>
+            <FeedbackPagination
+              page={page}
+              pageCount={pageCount}
+              firstRow={firstRow}
+              lastRow={lastRow}
+              matched={matched}
+            />
+          </Suspense>
         </section>
       </div>
     </main>

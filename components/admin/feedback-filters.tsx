@@ -47,6 +47,9 @@ export function FeedbackFilters({ filter }: { filter: FeedbackFilter }) {
     } else {
       next.set(key, value);
     }
+    // Any filter change invalidates the current page — page 3 of the old result
+    // set is meaningless against the new one, so start over at the first page.
+    next.delete("page");
     const qs = next.toString();
     startTransition(() => {
       router.push(qs ? `${ADMIN_PATH}?${qs}` : ADMIN_PATH, { scroll: false });

@@ -14,10 +14,17 @@ export type DeleteResult = { ok: true } | { ok: false; error: string };
 
 export type DashboardData = {
   stats: FeedbackStats;
+  /** Just this page's rows. */
   items: readonly FeedbackRecord[];
-  /** Rows matching the filter, before the row limit truncates them. */
+  /** Total rows matching the filter, across every page. */
   matched: number;
-  truncated: boolean;
+  /** The page actually served — may differ from the one asked for (see below). */
+  page: number;
+  pageCount: number;
+  pageSize: number;
+  /** 1-based index of the first row on this page; 0 when there are none. */
+  firstRow: number;
+  lastRow: number;
 };
 
 /**
@@ -33,23 +40,35 @@ export async function getDashboardData(
   await requireAdmin();
 
   const where = buildFeedbackWhere(filter);
+  // Safe: the schema restricts limit to an allow-list of values.
+  const pageSize = Number(filter.limit);
 
-  const [all, items, matched] = await Promise.all([
+  const [all, matched] = await Promise.all([
     prisma.feedback.findMany({ orderBy: { createdAt: "desc" } }),
-    prisma.feedback.findMany({
-      where,
-      orderBy: buildFeedbackOrderBy(filter),
-      // Safe: the schema restricts limit to an allow-list of values.
-      take: Number(filter.limit),
-    }),
     prisma.feedback.count({ where }),
   ]);
+
+  // Clamp before querying. Asking for page 9 of 3 — by hand, or by deleting the
+  // last row on the last page — should show the final page, not an empty one.
+  const pageCount = Math.max(1, Math.ceil(matched / pageSize));
+  const page = Math.min(Math.max(filter.page, 1), pageCount);
+
+  const items = await prisma.feedback.findMany({
+    where,
+    orderBy: buildFeedbackOrderBy(filter),
+    skip: (page - 1) * pageSize,
+    take: pageSize,
+  });
 
   return {
     stats: computeFeedbackStats(all),
     items,
     matched,
-    truncated: matched > items.length,
+    page,
+    pageCount,
+    pageSize,
+    firstRow: matched === 0 ? 0 : (page - 1) * pageSize + 1,
+    lastRow: (page - 1) * pageSize + items.length,
   };
 }
 
