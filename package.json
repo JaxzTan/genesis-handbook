@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "eslint",
     "seed:contributor": "node prisma/seed-contributor.mjs",
+    "seed:feedback": "node prisma/seed-feedback.mjs",
     "sync:contributors": "node prisma/sync-github-contributors.mjs",
     "postinstall": "prisma generate"
   },
