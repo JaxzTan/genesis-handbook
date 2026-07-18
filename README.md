@@ -26,24 +26,30 @@ Instead of a single voice attempting to cover everything, we crowdsource experti
 
 ## How It's Written
 
-Each year, contributions open to anyone with hackathon experience. Together, they write the handbook through three structured phases.
+Each year, contributions open to anyone with hackathon experience. Contributors write the handbook through three structured phases — then the team finalizes it and publishes. Every submission goes through the same flow: **submit (form) → review → clean up → publish**. The golden rule: humans decide what goes in — nothing reaches the page without a person reading it first.
 
-1. **Map It** — Contributors propose topics they believe belong in the guide. Everything is on the table.
-2. **Describe It** — Contributors write descriptions for each topic compiled from Phase 1.
-3. **Advise It** — For each topic, contributors selectively add their tips, insights, and real-world advice.
+1. **Propose It** *(8–12 Jun)* — Structure first. Contributors lock the topic list: which topics matter, what's missing, what every first-timer needs to know.
+2. **Describe It** *(15–19 Jun)* — The advice. Each locked topic gets the real, tactical tips — one tip per box, action + reason.
+3. **The Extras** *(22–26 Jun)* — The fun round. One-liners, do's and don'ts, war stories, and the tool that saved you at 3am.
+4. **Finalize It** *(29 Jun–3 Jul)* — On the team, not the contributors. Final triage, clean-up, sign-off — live on 3 July.
 
-Each phase runs with 3–5 days between them to consolidate. After each phase, submissions are reviewed and synthesized by AI into a single, balanced unified voice — preserving depth while removing redundancy.
+See [genesis-handbook-phases.md](genesis-handbook-phases.md) for the full phase guide.
 
 ## What Gets Covered
 
-Topics evolve each year based on what contributors surface. Year 1 — shaped by real experience, not assumptions.
+Topics evolve each year based on what contributors surface. Year 1 — locked in Phase 1, filled in Phase 2:
 
-- What a hackathon is and how it's structured
-- Judging criteria and how to think like a judge
-- Team management and defining roles
-- From idea to pitch
-- Tech stacks by role
-- Web3-specific tracks, tooling, and culture
+- Where to find quality hackathons
+- Finding a good team
+- Roles in a team — who does what
+- Brainstorming ideas
+- Time management & deadlines
+- Tech stack & frameworks
+- How to pitch
+- Submission criteria
+- What to do after the hackathon
+
+Plus **The Extras** from Phase 3: one-liners, do's and don'ts, and a tools drop.
 
 ## Roadmap
 
@@ -66,6 +72,13 @@ All contribution tasks live in our Discord. Pick what you want to work on, submi
 
 - **Contributors** — Anyone with hackathon experience. You don't need to know everything. You just need to have been there.
 - **Committee Members** — People who want to help shape how Genesis grows, operates, and sustains. From designers to developers — DM us in Discord.
+
+---
+
+## License
+
+- **Code** — [MIT](LICENSE)
+- **Handbook content** (tips, topics, Extras) — [CC BY-SA 4.0](LICENSE-CONTENT.md)
 
 ---
 

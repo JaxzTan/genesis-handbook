@@ -1,5 +1,3 @@
-import Link from "next/link";
-
 const COVER_PILLS = [
   "Community-vetted",
   "Annually updated",
@@ -22,7 +20,7 @@ export function CoverSlide() {
             borderRight: "1px solid rgba(255,255,255,0.07)",
           }}
         >
-          <div className="font-mono text-[9px] tracking-[0.2em] uppercase text-white/70">
+          <div className="font-mono text-[11px] tracking-[0.2em] uppercase text-white/70">
             Genesis · 2026 · Annual Hackathon Handbook
           </div>
           <div>
@@ -31,7 +29,7 @@ export function CoverSlide() {
               style={{ fontSize: "clamp(64px, 8.5vw, 120px)" }}
               dangerouslySetInnerHTML={{ __html: "Gene<em>sis</em>" }}
             />
-            <p className="text-[13px] text-white/40 leading-relaxed max-w-[38ch] mt-5">
+            <p className="text-[15px] text-white/40 leading-relaxed max-w-[38ch] mt-5">
               An Annual Hackathon Handbook, Written by the Community, for the
               Community.
             </p>
@@ -43,12 +41,6 @@ export function CoverSlide() {
             <span className="font-mono text-[9px] tracking-[0.15em] text-white/20 uppercase">
               genesis - handbook
             </span>
-            <Link
-              href="/handbook_v1"
-              className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/80 border border-white/25 px-4 py-2 rounded-full no-underline transition-colors duration-200 hover:bg-white hover:text-g-ink hover:border-white"
-            >
-              Read Handbook v1 →
-            </Link>
           </div>
         </div>
         <div
@@ -68,7 +60,7 @@ export function CoverSlide() {
           />
           <p
             className="font-serif italic font-light text-white/50 leading-snug relative z-10"
-            style={{ fontSize: "clamp(20px, 2.4vw, 32px)" }}
+            style={{ fontSize: "clamp(26.7px, 3.2vw, 42.7px)" }}
           >
             No single voice.
             <br />
@@ -78,11 +70,15 @@ export function CoverSlide() {
             <br />
             helping builders.
           </p>
-          <div className="flex flex-wrap gap-2 mt-10 relative z-10">
+          <p className="font-serif italic text-[17px] text-white/40 leading-relaxed mt-7 max-w-[42ch] relative z-10 pl-4 border-l border-white/20">
+            &quot;I wasted my first hackathon lost and mentor-less, so nobody
+            else has to.&quot;
+          </p>
+          <div className="flex flex-wrap gap-2 mt-10 mb-[10vh] relative z-10">
             {COVER_PILLS.map((pill) => (
               <span
                 key={pill}
-                className="border border-white/20 text-white/55 font-mono text-[9px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full"
+                className="border border-white/20 text-white/55 font-mono text-[12px] tracking-[0.12em] uppercase px-3 py-1.5 rounded-full"
               >
                 {pill}
               </span>

@@ -17,7 +17,7 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
         style={{ gridTemplateColumns: "1fr 1fr", gap: "80px" }}
       >
         <div className="flex flex-col gap-9">
-          <div className="fade-up font-mono text-[10px] tracking-[0.22em] uppercase text-g-accent flex items-center gap-2.5">
+          <div className="fade-up font-mono text-[12px] tracking-[0.22em] uppercase text-g-accent flex items-center gap-2.5">
             <span className="live-dot" />
             Live · Year 01 · In Progress
           </div>
@@ -35,10 +35,10 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
               className="font-serif font-black tracking-[-0.05em] leading-[0.9] text-g-ink tabular-nums text-[clamp(72px,9vw,120px)]"
             />
             <div className="flex flex-col gap-1 pb-2.5">
-              <div className="font-mono text-[10px] tracking-[0.18em] uppercase text-g-ink">
+              <div className="font-mono text-[12px] tracking-[0.18em] uppercase text-g-ink">
                 Contributions
               </div>
-              <div className="text-xs text-g-mid">
+              <div className="text-sm text-g-mid">
                 Across all 3 phases · updated live
               </div>
             </div>
@@ -50,7 +50,7 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
                 active={countersActive}
                 className="font-serif text-[28px] font-bold tracking-[-0.02em]"
               />
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-g-mid mt-0.5">
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-g-mid mt-0.5">
                 Contributors
               </div>
             </div>
@@ -60,7 +60,7 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
                 active={countersActive}
                 className="font-serif text-[28px] font-bold tracking-[-0.02em]"
               />
-              <div className="font-mono text-[9px] tracking-[0.15em] uppercase text-g-mid mt-0.5">
+              <div className="font-mono text-[11px] tracking-[0.15em] uppercase text-g-mid mt-0.5">
                 Topics Mapped
               </div>
             </div>
@@ -68,7 +68,7 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
         </div>
 
         <div className="fade-up d2 relative">
-          <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-g-mid mb-5 flex justify-between items-center">
+          <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-g-mid mb-5 flex justify-between items-center">
             <span>{"// Contributor Wall"}</span>
             <span className="text-g-ink">
               {stats.contributors} / {stats.capacity}
@@ -111,7 +111,7 @@ export function LiveSlide({ stats, contributors, countersActive }: Props) {
               );
             })}
           </div>
-          <div className="mt-[18px] text-xs text-g-mid flex justify-between">
+          <div className="mt-[18px] text-sm text-g-mid flex justify-between">
             <span>Each cell = one contributor</span>
             <a
               href={CONTRIBUTE_URL}

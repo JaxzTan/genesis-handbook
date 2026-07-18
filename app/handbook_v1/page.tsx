@@ -3,10 +3,10 @@ import Image from "next/image";
 import Link from "next/link";
 import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import { getContributorStats } from "@/actions/contributors";
+import { SiteNav } from "@/components/site-nav";
 import { TocHighlighter } from "./toc-highlighter";
 import {
   ALWAYS,
-  FEATURED,
   NEVER,
   ONELINERS,
   TIP_COUNT,
@@ -34,9 +34,9 @@ const jetbrainsMono = JetBrains_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "The Genesis Handbook — v1",
+  title: "The Genesis Handbook · v1",
   description:
-    "The stuff that actually decides hackathons — written by people who've competed and won.",
+    "The stuff that actually decides hackathons, written by people who've competed and won.",
 };
 
 // Same cadence as the home page: the contributor wall refreshes hourly.
@@ -65,17 +65,22 @@ export default async function HandbookPage() {
   ];
 
   return (
-    <div
-      className={`hb ${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
-    >
+    <>
+      <SiteNav
+        variant="light"
+        active="handbook"
+        menu={{
+          label: "On this page",
+          items: TOPICS.map((t) => ({ href: `#${t.id}`, label: t.title })),
+        }}
+      />
+      <div
+        className={`hb ${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      >
       <TocHighlighter />
 
       {/* ===================== HERO ===================== */}
       <header className="hero">
-        <Link href="/" className="back">
-          ← Genesis
-        </Link>
-        <br />
         <span className="eyebrow tag">Open · Non-profit · Community-built</span>
         <h1>
           The <span className="g">Genesis</span>
@@ -83,7 +88,7 @@ export default async function HandbookPage() {
           Handbook
         </h1>
         <p className="thesis">
-          The stuff that actually decides hackathons — written by people
+          The stuff that actually decides hackathons, written by people
           who’ve competed and won.
         </p>
         <div className="meta">
@@ -101,15 +106,21 @@ export default async function HandbookPage() {
           </span>
         </div>
 
-        {/* signature: a real contribution, shown up front */}
-        <div className="featured">
-          <div className="body">
-            <span className="lbl">{FEATURED.label}</span>
-            <p>{FEATURED.text}</p>
-            <span className="credit">
-              {FEATURED.by} <span className="role">· {FEATURED.role}</span>
-            </span>
-          </div>
+        {/* the one thing this handbook solves */}
+        <div className="keypoint">
+          <span className="lbl">Keep this in mind</span>
+          <p>
+            This handbook solves one thing: the confusion of your first
+            hackathon. Most new joiners have no idea how to start or how a
+            hackathon actually flows. So the nine topics below run in the
+            order a hackathon really happens: find one, build the team, split
+            the roles, shape the idea, manage the clock, pick the stack,
+            pitch it, submit it, and what to do after. If you&apos;re new,
+            start at 01 and read straight down. That is the flow.
+          </p>
+          <span className="credit">
+            Jaxz <span className="role">· co-founder</span>
+          </span>
         </div>
       </header>
 
@@ -149,7 +160,6 @@ export default async function HandbookPage() {
               {topic.tips.map((tip) => (
                 <div key={`${topic.id}-${tip.by}-${tip.text.slice(0, 24)}`} className="tip">
                   <p>{tip.text}</p>
-                  <span className="credit mono">{tip.by}</span>
                 </div>
               ))}
             </section>
@@ -160,7 +170,7 @@ export default async function HandbookPage() {
             <span className="num mono">✷</span>
             <h2>The Extras</h2>
             <p className="desc">
-              The stuff that didn’t fit a box — the hard-won one-liners, the
+              The stuff that didn’t fit a box: the hard-won one-liners, the
               do’s and don’ts, the things you only learn at 3am.
             </p>
 
@@ -170,7 +180,6 @@ export default async function HandbookPage() {
                 {ONELINERS.map((o) => (
                   <div key={o.by + o.text.slice(0, 16)} className="oneliner">
                     <span className="q">{o.text}</span>
-                    <span className="credit mono">{o.by}</span>
                   </div>
                 ))}
               </div>
@@ -203,7 +212,6 @@ export default async function HandbookPage() {
                 {TOOLS.map((t) => (
                   <div key={t.by + t.text.slice(0, 16)} className="oneliner">
                     <span className="q">{t.text}</span>
-                    <span className="credit mono">{t.by}</span>
                   </div>
                 ))}
               </div>
@@ -245,9 +253,8 @@ export default async function HandbookPage() {
                       initialsOf(c.name)
                     )}
                   </span>
-                  <span>
+                  <span className="who">
                     <span className="n">{c.name}</span>
-                    <br />
                     <span className="gh">@{c.name}</span>
                   </span>
                 </a>
@@ -261,22 +268,30 @@ export default async function HandbookPage() {
       <footer>
         <div className="foot">
           <div className="cta">
-            <h3>Got a tip worth passing on?</h3>
+            <span className="eyebrow">We’re listening</span>
+            <h3>Tell us what to fix.</h3>
             <p>
-              The handbook only gets better when people who’ve competed add
-              what they know. Contribute one thing you wish someone had told
-              you — or tell us what’s missing, confusing, or just wrong.
+              Genesis is written by the community. That includes telling us
+              what’s missing, confusing, or just wrong. Anonymous is fine.
             </p>
           </div>
           <Link className="btn" href="/feedback">
-            Add your tip →
+            Give feedback →
           </Link>
           <div className="legal">
             Genesis Handbook · Open · Non-profit · Built together · Advice is
-            contributor-sourced and community-reviewed.
+            contributor-sourced and community-reviewed · Content licensed under{" "}
+            <a
+              href="https://creativecommons.org/licenses/by-sa/4.0/"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              CC BY-SA 4.0
+            </a>
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </>
   );
 }

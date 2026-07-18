@@ -78,9 +78,9 @@ export function CoveredSlide() {
               __html: "Everything that <em>actually</em> matters.",
             }}
           />
-          <p className="fade-up d1 text-sm text-white/40 leading-[1.7] max-w-[36ch]">
-            Topics evolve each year based on what contributors surface. Year 1 —
-            shaped by real experience, not assumptions.
+          <p className="fade-up d1 text-[16px] text-white/50 leading-[1.7] max-w-[36ch]">
+            Topics evolve each year based on what contributors surface. Year 1
+            is shaped by real experience, not assumptions.
           </p>
         </div>
         <div className="flex flex-col">
@@ -90,7 +90,7 @@ export function CoveredSlide() {
               {t.label}
             </div>
           ))}
-          <div className="mt-5 font-mono text-[9px] tracking-[0.14em] text-white/70 uppercase">
+          <div className="mt-5 font-mono text-[11px] tracking-[0.14em] text-white/70 uppercase">
             Topics evolve each year based on contributor input
           </div>
         </div>

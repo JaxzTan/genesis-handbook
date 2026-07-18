@@ -13,6 +13,7 @@ import { CoveredSlide } from "./slides/06-covered";
 import { FlowSlide } from "./slides/07-flow";
 import { SampleSlide } from "./slides/08-sample";
 import { ResultSlide } from "./slides/09-result";
+import { BuildingSlide } from "./slides/10-building";
 import { RoadmapSlide } from "./slides/10-roadmap";
 import { CtaSlide } from "./slides/11-cta";
 
@@ -78,8 +79,9 @@ export function HomeScroller({ stats, contributors }: Props) {
       <CoveredSlide />
       <FlowSlide />
       <SampleSlide />
-      <ResultSlide />
+      <BuildingSlide />
       <RoadmapSlide />
+      <ResultSlide />
       <CtaSlide />
     </>
   );

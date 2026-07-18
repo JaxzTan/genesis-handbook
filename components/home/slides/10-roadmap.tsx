@@ -3,7 +3,7 @@ const COLUMNS = [
     yearLabel: <>Y1</>,
     title: "Lay the Foundation",
     milestones: [
-      { delay: "d1", text: "20–30 contributors for the inaugural edition" },
+      { delay: "d1", text: "20-30 contributors for the inaugural edition" },
       { delay: "d2", text: "Publish the first edition of Genesis" },
       {
         delay: "d3",
@@ -59,7 +59,7 @@ export function RoadmapSlide() {
               {col.milestones.map((m, idx) => (
                 <div
                   key={idx}
-                  className={`fade-up ${m.delay} flex gap-3.5 items-start text-sm leading-[1.6] text-[#555553]`}
+                  className={`fade-up ${m.delay} flex gap-3.5 items-start text-[15px] leading-[1.6] text-[#555553]`}
                 >
                   <div className="w-[5px] h-[5px] bg-g-accent rounded-full flex-shrink-0 mt-[7px]" />
                   <span>{m.text}</span>

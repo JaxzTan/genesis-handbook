@@ -21,7 +21,6 @@ Landing site for **Genesis**, an annual community-written hackathon handbook. Si
 - Known gaps:
   - Rate limiter is in-memory per instance (`utils/rate-limit.ts`) — resets on cold start; noted for swap to Upstash Redis in production.
   - `HandbookStats.topics` is hardcoded to `0` (no topic source yet).
-  - Slide 9 ("result") has a placeholder `href="#"` link.
   - README's Discord invite (`discord.gg/NayguCAK`) differs from the code default (`discord.gg/D7CxrmQrqu`) — the env var `NEXT_PUBLIC_DISCORD_INVITE` decides in production. <!-- TODO: confirm which invite is canonical -->
 
 ## Directory layout
@@ -74,8 +73,8 @@ vercel.json                       # Cron: hourly sync-contributors
 
 | URL | What |
 |---|---|
-| `/` | Home — 11-slide scroller with live contributor wall; cover links to `/handbook_v1` |
-| `/handbook_v1` | Handbook v1 — Phase 2/3 community tips (blue-white theme, own fonts/CSS under `app/handbook_v1/`); wall reuses `getContributorStats()`; footer CTA → `/feedback` |
+| `/` | Home — 11-slide scroller with live contributor wall; slide 9 "Read Edition 01" links to `/handbook_v1` |
+| `/handbook_v1` | Handbook v1 — Phase 2/3 community tips (blue-white theme, own fonts/CSS under `app/handbook_v1/`); wall reuses `getContributorStats()`; footer CTA → `/feedback`; content licensed CC BY-SA 4.0 |
 | `/feedback` | Feedback form |
 
 ### API endpoints
