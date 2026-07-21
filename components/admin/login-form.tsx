@@ -38,7 +38,7 @@ export function LoginForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="admin-username"
-          className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid"
+          className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid"
         >
           Username
         </label>
@@ -51,7 +51,7 @@ export function LoginForm() {
           value={username}
           maxLength={ADMIN_LIMITS.usernameMax}
           onChange={(e) => setUsername(e.target.value)}
-          className="border border-g-rule bg-g-off px-3.5 py-2.5 text-sm text-g-ink rounded outline-none focus:border-g-accent transition-colors"
+          className="border border-g-rule bg-g-off px-3.5 py-2.5 text-[15px] text-g-ink rounded outline-none focus:border-g-accent transition-colors"
           placeholder="admin"
         />
       </div>
@@ -59,7 +59,7 @@ export function LoginForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="admin-password"
-          className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid"
+          className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid"
         >
           Password
         </label>
@@ -71,13 +71,13 @@ export function LoginForm() {
           value={password}
           maxLength={ADMIN_LIMITS.passwordMax}
           onChange={(e) => setPassword(e.target.value)}
-          className="border border-g-rule bg-g-off px-3.5 py-2.5 text-sm text-g-ink rounded outline-none focus:border-g-accent transition-colors"
+          className="border border-g-rule bg-g-off px-3.5 py-2.5 text-[15px] text-g-ink rounded outline-none focus:border-g-accent transition-colors"
           placeholder="••••••••"
         />
       </div>
 
       {error && (
-        <p className="text-sm text-g-accent" role="alert">
+        <p className="text-[15px] text-g-accent" role="alert">
           {error}
         </p>
       )}
@@ -85,7 +85,7 @@ export function LoginForm() {
       <button
         type="submit"
         disabled={pending}
-        className="self-start inline-flex items-center gap-2.5 px-6 py-3 bg-g-ink text-white text-[13px] font-semibold rounded no-underline transition-opacity duration-200 disabled:opacity-50"
+        className="self-start inline-flex items-center gap-2.5 px-6 py-3 bg-g-ink text-white text-[14px] font-semibold rounded no-underline transition-opacity duration-200 disabled:opacity-50"
       >
         {pending ? "Checking…" : "Sign in"}
       </button>

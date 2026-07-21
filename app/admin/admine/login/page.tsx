@@ -3,7 +3,7 @@ import Link from "next/link";
 import { LoginForm } from "@/components/admin/login-form";
 
 export const metadata: Metadata = {
-  title: "Admin — Genesis",
+  title: "Admin · Genesis",
   // Keep the login page out of search results and AI crawlers.
   robots: { index: false, follow: false },
 };
@@ -20,7 +20,7 @@ export default function AdminLoginPage() {
         </Link>
 
         <div className="mt-6 mb-9">
-          <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-g-accent mb-4">
+          <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-g-accent mb-4">
             Restricted
           </div>
           <h1

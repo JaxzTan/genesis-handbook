@@ -5,7 +5,7 @@ export function RatingDistribution({ stats }: { stats: FeedbackStats }) {
     return (
       <div className="border border-g-rule bg-g-off px-6 py-8 text-center">
         <p className="text-sm text-g-mid">
-          No ratings yet — the distribution appears once someone rates.
+          No ratings yet. The distribution appears once someone rates.
         </p>
       </div>
     );

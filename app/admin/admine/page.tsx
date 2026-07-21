@@ -13,7 +13,7 @@ import { isFiltered } from "@/utils/feedback-query";
 import { feedbackFilterSchema } from "@/validations/admin";
 
 export const metadata: Metadata = {
-  title: "Feedback dashboard — Genesis",
+  title: "Feedback dashboard · Genesis",
   robots: { index: false, follow: false },
 };
 
@@ -45,7 +45,7 @@ export default async function AdminDashboardPage({
               ← Genesis
             </Link>
 
-            <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-g-accent mt-6 mb-4">
+            <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-g-accent mt-6 mb-4">
               Admin
             </div>
             <h1
