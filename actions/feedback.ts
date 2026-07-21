@@ -39,7 +39,7 @@ export async function submitFeedback(raw: unknown): Promise<FeedbackResult> {
   if (!checkRateLimit(`feedback:${ip}`)) {
     return {
       ok: false,
-      error: "Too many submissions — please try again in a few minutes.",
+      error: "Too many submissions. Please try again in a few minutes.",
     };
   }
 

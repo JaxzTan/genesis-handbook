@@ -80,23 +80,11 @@ html:has(.hb) {
 }
 
 /* ---------- HERO ---------- */
+/* Extra top padding clears the fixed 3.5rem site nav. */
 .hb header.hero {
   max-width: var(--wrap);
   margin: 0 auto;
-  padding: 5.5rem 1.5rem 3rem;
-}
-.hb .hero .back {
-  display: inline-block;
-  font-family: var(--mono);
-  font-size: 0.72rem;
-  letter-spacing: 0.15em;
-  text-transform: uppercase;
-  color: var(--faint);
-  margin-bottom: 1.6rem;
-}
-.hb .hero .back:hover {
-  color: var(--text);
-  text-decoration: none;
+  padding: 8rem 1.5rem 3rem;
 }
 .hb .hero .tag {
   color: var(--coral);
@@ -131,50 +119,35 @@ html:has(.hb) {
   font-weight: 500;
 }
 
-/* featured tip in hero — the signature "contribution" card */
-.hb .featured {
+/* "Keep this in mind" callout: the one problem the handbook solves */
+.hb .keypoint {
   margin-top: 2.4rem;
   border: 1px solid var(--hair);
+  border-left: 3px solid var(--gold);
   background: var(--surface);
   border-radius: 14px;
-  padding: 1.4rem 1.5rem;
+  padding: 1.2rem 1.5rem;
   max-width: 640px;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 1px 3px rgba(18, 42, 84, 0.06), 0 12px 30px rgba(18, 42, 84, 0.06);
 }
-.hb .featured::before {
-  content: "+";
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 2.6rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.hb .keypoint .lbl {
   font-family: var(--mono);
-  font-size: 1.3rem;
-  color: var(--teal);
-  background: rgba(14, 165, 233, 0.1);
-}
-.hb .featured .body {
-  padding-left: 2rem;
-}
-.hb .featured .lbl {
-  font-family: var(--mono);
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--faint);
+  color: var(--gold);
 }
-.hb .featured p {
-  font-family: var(--display);
-  font-weight: 500;
-  font-size: 1.15rem;
-  line-height: 1.45;
-  margin: 0.35rem 0 0.6rem;
+.hb .keypoint p {
+  margin-top: 0.45rem;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--text);
 }
+.hb .keypoint .credit {
+  display: block;
+  margin-top: 0.8rem;
+  text-align: right;
+}
+
 .hb .credit {
   font-family: var(--mono);
   font-size: 0.8rem;
@@ -195,10 +168,10 @@ html:has(.hb) {
   align-items: start;
 }
 
-/* sidebar TOC */
+/* sidebar TOC (top offset clears the fixed site nav) */
 .hb nav.toc {
   position: sticky;
-  top: 2rem;
+  top: 5.5rem;
   font-size: 0.9rem;
 }
 .hb nav.toc .h {
@@ -245,7 +218,7 @@ html:has(.hb) {
 .hb section.topic {
   padding-top: 1rem;
   margin-bottom: 3.4rem;
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5rem;
 }
 .hb .topic .num {
   font-family: var(--mono);
@@ -297,7 +270,7 @@ html:has(.hb) {
 
 /* ---------- EXTRAS ---------- */
 .hb section.extras {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5rem;
   padding-top: 1rem;
   margin-bottom: 3.4rem;
 }
@@ -387,7 +360,7 @@ html:has(.hb) {
 
 /* ---------- CONTRIBUTORS WALL ---------- */
 .hb section.wall {
-  scroll-margin-top: 1.5rem;
+  scroll-margin-top: 5rem;
   padding-top: 1rem;
   grid-column: 1 / -1;
   max-width: none;
@@ -404,7 +377,7 @@ html:has(.hb) {
 }
 .hb .people {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 0.8rem;
 }
 .hb .person {
@@ -417,6 +390,12 @@ html:has(.hb) {
   padding: 0.7rem 0.9rem;
   box-shadow: 0 1px 2px rgba(18, 42, 84, 0.05);
   transition: border-color 0.15s, transform 0.15s, box-shadow 0.15s;
+}
+/* text column: allow it to shrink so long names never blow out the card */
+.hb .person .who {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 .hb .person:hover {
   border-color: var(--teal);
@@ -448,11 +427,19 @@ html:has(.hb) {
   font-size: 0.95rem;
   line-height: 1.2;
   color: var(--text);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .hb .person .gh {
   font-family: var(--mono);
   font-size: 0.74rem;
   color: var(--teal);
+  display: block;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* ---------- FOOTER / CTA ---------- */
@@ -469,6 +456,10 @@ html:has(.hb) {
   gap: 1.5rem;
   justify-content: space-between;
   align-items: center;
+}
+.hb .foot .cta .eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
 }
 .hb .foot .cta h3 {
   font-family: var(--display);
@@ -520,7 +511,7 @@ html:has(.hb) {
   .hb .toc-mobile {
     display: block;
     position: sticky;
-    top: 0;
+    top: 3.5rem;
     z-index: 20;
     background: rgba(244, 248, 255, 0.92);
     backdrop-filter: blur(8px);
@@ -552,6 +543,6 @@ html:has(.hb) {
     grid-template-columns: 1fr;
   }
   .hb header.hero {
-    padding-top: 3.5rem;
+    padding-top: 6rem;
   }
 }

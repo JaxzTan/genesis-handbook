@@ -2,7 +2,7 @@ const FEATURES = [
   {
     delay: "d3",
     title: "Annual",
-    blurb: "Always current — never left to go stale",
+    blurb: "Always current, never left to go stale",
     icon: (
       <svg className="w-10 h-10" viewBox="0 0 40 40" fill="none">
         <rect x="5" y="8" width="30" height="26" rx="3" stroke="#1a56db" strokeWidth="1.4" />
@@ -59,13 +59,13 @@ export function WhatSlide() {
           />
         </div>
         <div>
-          <p className="fade-up d1 text-[15px] leading-[1.75] text-[#3a3a38]">
+          <p className="fade-up d1 text-[17px] leading-[1.75] text-[#3a3a38]">
             Genesis is an annual hackathon handbook where the community converges
             to architect and compile a definitive guide. Instead of a single
             voice attempting to cover everything, we crowdsource expertise, each
             contributor documenting exactly what they know best.
           </p>
-          <p className="fade-up d2 text-[15px] leading-[1.75] text-[#3a3a38] mt-5">
+          <p className="fade-up d2 text-[17px] leading-[1.75] text-[#3a3a38] mt-5">
             The result is a resource that&apos;s more comprehensive, balanced,
             and current than any individual could ever produce. It&apos;s updated
             annually, forged from real hackathon experience, and entirely owned
@@ -79,7 +79,7 @@ export function WhatSlide() {
                   <div className="font-serif text-[28px] font-bold text-g-ink tracking-[-0.03em] leading-none">
                     {s.title}
                   </div>
-                  <div className="text-xs text-g-mid leading-relaxed mt-1">
+                  <div className="text-sm text-g-mid leading-relaxed mt-1">
                     {s.blurb}
                   </div>
                 </div>
