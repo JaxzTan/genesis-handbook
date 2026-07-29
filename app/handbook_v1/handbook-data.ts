@@ -213,7 +213,7 @@ export const TOPICS: HbTopic[] = [
         by: "Nizar",
       },
       {
-        text: "Most hackathons ask for the same package, so treat it like a checklist: 1) a GitHub repo, set to public and kept clean, because judges can't grade what they can't open; 2) a pitch deck, as a Canva link and/or a PDF; 3) a pitch video briefly explaining the problem statement; 4) an executive summary, a roughly 50-word description of the project.",
+        text: "Most hackathons ask for the same package, so treat it like a checklist you can prepare in advance. You'll need a GitHub repo, set to public and kept clean, because judges can't grade what they can't open. You'll need a pitch deck, usually as a Canva link and/or a PDF. You'll need a pitch video that briefly explains the problem statement. And you'll need an executive summary, a roughly 50-word description of the project.",
         by: "Hana Tang",
       },
       {
