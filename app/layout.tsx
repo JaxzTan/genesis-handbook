@@ -23,7 +23,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Genesis — An Annual Hackathon Handbook",
+  title: "Genesis · An Annual Hackathon Handbook",
   description:
     "An annual hackathon handbook, written by the community, for the community.",
 };
@@ -36,6 +36,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
+      data-scroll-behavior="smooth"
       className={`${fraunces.variable} ${instrumentSans.variable} ${geistMono.variable}`}
     >
       <body className="bg-white text-g-ink font-sans overflow-x-hidden">

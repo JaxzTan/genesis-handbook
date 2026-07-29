@@ -6,7 +6,7 @@ export const DISCORD_INVITE =
   process.env.NEXT_PUBLIC_DISCORD_INVITE || "https://discord.gg/D7CxrmQrqu";
 
 // Number of slides in the home deck (drives the side nav dots).
-export const SLIDE_COUNT = 11;
+export const SLIDE_COUNT = 12;
 
 // Target size of the inaugural contributor cohort (the wall capacity).
 export const CONTRIBUTOR_CAPACITY = 30;

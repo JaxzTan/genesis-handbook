@@ -1,12 +1,14 @@
+import Link from "next/link";
+
 export function ResultSlide() {
   return (
     <section
-      id="s9"
-      data-slide-id="9"
+      id="s11"
+      data-slide-id="11"
       className="slide bg-g-accent text-white !border-b-0 items-center text-center"
     >
       <div className="fade-up">
-        <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-white/70 mb-8">
+        <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-white/70 mb-8">
           The Result
         </div>
         <h2
@@ -16,13 +18,12 @@ export function ResultSlide() {
             __html: "The Genesis<br><em>Hackathon</em><br>Handbook.",
           }}
         />
-        <p className="text-[15px] text-white/70 mt-7 max-w-[50ch] mx-auto">
+        <p className="text-[17px] text-white/70 mt-7 max-w-[50ch] mx-auto">
           Written by the community. For the community. Every year.
         </p>
-        <a
-          href="#"
-          aria-disabled="true"
-          className="handbook-cta disabled inline-flex items-center gap-2.5 mt-9 px-6 py-3.5 bg-white text-g-accent text-[13px] font-semibold no-underline transition-opacity duration-200"
+        <Link
+          href="/handbook_v1"
+          className="handbook-cta inline-flex items-center gap-2.5 mt-9 px-6 py-3.5 bg-white text-g-accent text-[14px] font-semibold no-underline transition-opacity duration-200 hover:opacity-90"
         >
           Read Edition 01
           <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -34,9 +35,9 @@ export function ResultSlide() {
               strokeLinejoin="round"
             />
           </svg>
-        </a>
-        <div className="font-mono text-[10px] tracking-[0.15em] uppercase text-white/55 mt-4">
-          Releasing after Phase 03 closes
+        </Link>
+        <div className="font-mono text-[12px] tracking-[0.15em] uppercase text-white/55 mt-4">
+          Edition 01 · Live since 29 July 2026
         </div>
       </div>
     </section>

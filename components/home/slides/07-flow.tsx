@@ -8,17 +8,16 @@ type FlowColumn = {
 
 const COLUMNS: FlowColumn[] = [
   {
-    phase: "Phase 01 · Map It",
+    phase: "Phase 01 · Propose It",
     title: "Topics Proposed",
     items: [
       {
         label: "Contributor A",
         body: (
           <div className="flow-topic-list">
-            <span>How to find a team</span>
+            <span>Where to find hackathons</span>
+            <span>Finding a good team</span>
             <span>Judging criteria</span>
-            <span>Roles</span>
-            <span>Time management</span>
           </div>
         ),
       },
@@ -26,9 +25,9 @@ const COLUMNS: FlowColumn[] = [
         label: "Contributor B",
         body: (
           <div className="flow-topic-list">
-            <span>Team management</span>
-            <span>What roles will we need</span>
-            <span>Managing deadlines</span>
+            <span>Roles: who does what</span>
+            <span>Time management & deadlines</span>
+            <span>Submission criteria</span>
           </div>
         ),
       },
@@ -36,8 +35,8 @@ const COLUMNS: FlowColumn[] = [
         label: "Contributor C",
         body: (
           <div className="flow-topic-list">
-            <span>Ideation</span>
-            <span>Demo day</span>
+            <span>Brainstorming ideas</span>
+            <span>How to pitch</span>
             <span>Tech stack</span>
           </div>
         ),
@@ -46,37 +45,37 @@ const COLUMNS: FlowColumn[] = [
   },
   {
     phase: "Phase 02 · Describe It",
-    title: "Descriptions Written",
+    title: "Real Advice Added",
     items: [
       {
-        label: "How to Find a Team",
-        body: "Finding a team means more than filling seats. It's about identifying complementary skills, aligning on ambition, and establishing trust fast — ideally before the clock even starts.",
+        label: 'On "Submission criteria" · Nizar',
+        body: '"Always read the judging rubric before writing any code."',
       },
       {
-        label: "Managing Roles & Deadlines",
-        body: "Without clear ownership, hackathon teams stall. This covers role assignment based on strengths, setting internal milestones, and what to do when someone goes quiet at hour 18.",
+        label: 'On "Time & deadlines" · Nizar',
+        body: '"Try to complete a working MVP at least one day before the deadline."',
       },
       {
-        label: "Demo Day",
-        body: "Demo day is a performance. Judges are fatigued by demo 10. This covers how to structure your 3 minutes and how to hold the room even when your live demo decides to break.",
+        label: 'On "Brainstorming ideas" · Hana Tang',
+        body: '"Never build a solution looking for a problem."',
       },
     ],
   },
   {
-    phase: "Phase 03 · Advise It",
-    title: "Real Advice Added",
+    phase: "Phase 03 · The Extras",
+    title: "The Fun Stuff Collected",
     items: [
       {
-        label: 'On "Find a Team" — 3 contributors',
-        body: '"Post in team-finding channels 48h before kickoff, not on the day. Include your stack, timezone, and what you want to build — specificity gets replies. Vague posts get ignored."',
+        label: "One-liner · Hana Tang",
+        body: '"Stop trying to write flawless, production-ready enterprise code."',
       },
       {
-        label: 'On "Roles & Deadlines" — 4 contributors',
-        body: '"Set a hard internal deadline 3 hours before submission. The last stretch is for polish only — not new features. Scope creep at hour 20 kills otherwise strong projects."',
+        label: "Never do this · Gan Jayci",
+        body: '"Don\'t overcomplicate the project. Start from the core."',
       },
       {
-        label: 'On "Demo Day" — 3 contributors',
-        body: '"Open with the problem, not the solution. Make judges feel the pain before you show the fix. If your live demo might break, have a recording ready and own it upfront."',
+        label: "Tool drop · Gan Jayci",
+        body: '"Trello / Discord, for tracking each member\'s responsibilities."',
       },
     ],
   },
@@ -98,7 +97,7 @@ export function FlowSlide() {
         {COLUMNS.map((col, idx) => (
           <Fragment key={col.phase}>
             <div className="flow-col bg-white border border-g-rule px-[22px] py-[26px]">
-              <div className="font-mono text-[9px] tracking-[0.15em] text-g-accent mb-3 uppercase">
+              <div className="font-mono text-[11px] tracking-[0.15em] text-g-accent mb-3 uppercase">
                 {col.phase}
               </div>
               <div className="font-serif text-lg font-bold mb-4">
@@ -110,10 +109,10 @@ export function FlowSlide() {
                     key={i}
                     className="bg-g-off border border-g-rule px-3.5 py-2.5"
                   >
-                    <span className="font-mono text-[9px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">
+                    <span className="font-mono text-[11px] text-g-mid block mb-1.5 uppercase tracking-[0.1em]">
                       {item.label}
                     </span>
-                    <div className="text-xs leading-[1.65] text-g-ink">
+                    <div className="text-sm leading-[1.65] text-g-ink">
                       {item.body}
                     </div>
                   </div>
@@ -136,10 +135,11 @@ export function FlowSlide() {
           </Fragment>
         ))}
       </div>
-      <div className="d3 mt-9 px-[22px] py-[18px] bg-g-ink text-white/60 text-[13px] leading-[1.6] flex gap-3.5 items-start max-w-[680px]">
+      <div className="d3 mt-9 px-[22px] py-[18px] bg-g-ink text-white/60 text-[15px] leading-[1.6] flex gap-3.5 items-start max-w-[680px]">
         <span className="text-g-accent flex-shrink-0 mt-0.5">✦</span>
-        After each phase, AI synthesizes all contributions into a single balanced
-        voice — preserving depth while removing redundancy.
+        Every submission is reviewed by a person before it moves on. Accepted
+        material is cleaned up, synthesized, and published to the live handbook.
+        Humans decide what goes in.
       </div>
     </section>
   );

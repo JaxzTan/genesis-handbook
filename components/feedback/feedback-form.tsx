@@ -38,13 +38,13 @@ export function FeedbackForm() {
   if (done) {
     return (
       <div className="border border-g-rule bg-g-off px-8 py-12 text-center">
-        <div className="font-mono text-[10px] tracking-[0.2em] uppercase text-g-accent mb-3">
+        <div className="font-mono text-[12px] tracking-[0.2em] uppercase text-g-accent mb-3">
           Received
         </div>
         <h2 className="font-serif text-3xl font-bold tracking-[-0.02em] text-g-ink mb-3">
           Thank you.
         </h2>
-        <p className="text-sm text-g-mid max-w-[42ch] mx-auto leading-relaxed">
+        <p className="text-[15px] text-g-mid max-w-[42ch] mx-auto leading-relaxed">
           Your feedback helps shape the next edition of Genesis. We read every
           submission.
         </p>
@@ -59,7 +59,7 @@ export function FeedbackForm() {
     >
       {/* Rating */}
       <fieldset className="flex flex-col gap-3 border-0 p-0 m-0">
-        <legend className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid p-0">
+        <legend className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid p-0">
           How was your experience? (optional)
         </legend>
         <div className="flex gap-2">
@@ -87,7 +87,7 @@ export function FeedbackForm() {
         <div className="flex flex-col gap-2">
           <label
             htmlFor="fb-name"
-            className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid"
+            className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid"
           >
             Name (optional)
           </label>
@@ -97,14 +97,14 @@ export function FeedbackForm() {
             value={name}
             maxLength={FEEDBACK_LIMITS.nameMax}
             onChange={(e) => setName(e.target.value)}
-            className="border border-g-rule bg-g-off px-3.5 py-2.5 text-sm text-g-ink rounded outline-none focus:border-g-accent transition-colors"
-            placeholder="Jane Builder"
+            className="border border-g-rule bg-g-off px-3.5 py-2.5 text-[15px] text-g-ink rounded outline-none focus:border-g-accent transition-colors"
+            placeholder="John Doe"
           />
         </div>
         <div className="flex flex-col gap-2">
           <label
             htmlFor="fb-email"
-            className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid"
+            className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid"
           >
             Email (optional)
           </label>
@@ -114,8 +114,8 @@ export function FeedbackForm() {
             value={email}
             maxLength={FEEDBACK_LIMITS.emailMax}
             onChange={(e) => setEmail(e.target.value)}
-            className="border border-g-rule bg-g-off px-3.5 py-2.5 text-sm text-g-ink rounded outline-none focus:border-g-accent transition-colors"
-            placeholder="you@example.com"
+            className="border border-g-rule bg-g-off px-3.5 py-2.5 text-[15px] text-g-ink rounded outline-none focus:border-g-accent transition-colors"
+            placeholder="john.doe@example.com"
           />
         </div>
       </div>
@@ -124,7 +124,7 @@ export function FeedbackForm() {
       <div className="flex flex-col gap-2">
         <label
           htmlFor="fb-message"
-          className="font-mono text-[9px] tracking-[0.16em] uppercase text-g-mid"
+          className="font-mono text-[11px] tracking-[0.16em] uppercase text-g-mid"
         >
           Your feedback
         </label>
@@ -135,10 +135,10 @@ export function FeedbackForm() {
           maxLength={FEEDBACK_LIMITS.messageMax}
           onChange={(e) => setMessage(e.target.value)}
           rows={5}
-          className="border border-g-rule bg-g-off px-3.5 py-3 text-sm text-g-ink leading-relaxed rounded outline-none focus:border-g-accent transition-colors resize-y"
+          className="border border-g-rule bg-g-off px-3.5 py-3 text-[15px] text-g-ink leading-relaxed rounded outline-none focus:border-g-accent transition-colors resize-y"
           placeholder="What worked, what didn't, what you'd want to see in the handbook…"
         />
-        <div className="text-right font-mono text-[9px] text-g-mid">
+        <div className="text-right font-mono text-[11px] text-g-mid">
           {message.length} / {FEEDBACK_LIMITS.messageMax}
         </div>
       </div>
@@ -157,7 +157,7 @@ export function FeedbackForm() {
       </div>
 
       {error && (
-        <p className="text-sm text-g-accent" role="alert">
+        <p className="text-[15px] text-g-accent" role="alert">
           {error}
         </p>
       )}
@@ -165,7 +165,7 @@ export function FeedbackForm() {
       <button
         type="submit"
         disabled={pending}
-        className="self-start inline-flex items-center gap-2.5 px-6 py-3 bg-g-ink text-white text-[13px] font-semibold rounded no-underline transition-opacity duration-200 disabled:opacity-50"
+        className="self-start inline-flex items-center gap-2.5 px-6 py-3 bg-g-ink text-white text-[14px] font-semibold rounded no-underline transition-opacity duration-200 disabled:opacity-50"
       >
         {pending ? "Sending…" : "Send feedback"}
       </button>
